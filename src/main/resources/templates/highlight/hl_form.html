@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body class="fix-header">
+	
+    <div id="wrapper">
+		<nav class="navbar navbar-default navbar-static-top m-b-0" th:replace="layout :: header"></nav>
+		<div class="navbar-default sidebar" role="navigation" th:replace="layout :: menu"> </div>
+		<div id="page-wrapper">
+			<div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">HighLight Table</h4> 
+                    </div>
+                </div>
+                <!-- .row -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title m-b-0">HighLight Form</h3>
+                            <p class="text-muted m-b-30 font-13"> Add New HighLight Video </p>
+                            <form class="form-horizontal" action="#" th:action="@{/highlight/submit}" th:object="${highlight}" method="POST" novalidate="novalidate">
+                            	<input type="hidden" th:field="*{id_hl}" />
+                                <div class="form-group">
+                                    <label class="col-md-12" for="title_hl">Title HighLight</label>
+                                    <div class="col-md-12">
+                                        <input type="text" id="title_hl" name="title_hl" th:field="*{title_hl}" th:errorclass="field-error" class="form-control" placeholder="Enter Title..." /> 
+                                    	<em th:if="${#fields.hasErrors('title_hl')}" th:errors="*{title_hl}"></em>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12" for="img_hl">Link Images HighLight</label>
+                                    <div class="col-md-12">
+                                        <input type="text" id="img_hl" name="img_hl" th:field="*{img_hl}" th:errorclass="field-error" class="form-control" placeholder="Enter Link Images..."  /> 
+                                    	<em th:if="${#fields.hasErrors('img_hl')}" th:errors="*{img_hl}"></em>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12" for="link_hl">Link HighLight</label>
+                                    <div class="col-md-12">
+                                        <input type="text" id="link_hl" name="link_hl" th:field="*{link_hl}" th:errorclass="field-error" class="form-control" placeholder="Enter Link..."  /> 
+                                    	<em th:if="${#fields.hasErrors('link_hl')}" th:errors="*{link_hl}"></em>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12" for="date_hl">Date</label>
+                                    <div class="col-md-12">
+                                        <input type="date" id="date_hl" name="date_hl" th:field="*{date_hl}" class="form-control" /> 
+                                    	
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-12">Status HighLights</label>
+                                    <div class="col-sm-12">
+                                        <label class="col-sm-6">
+                                            <div class="radio radio-success">
+                                                <input type="radio" name="radio" id="radio" value="1" th:field="*{status_hl}"/>
+                                                <label for="radio"> Activate </label>
+                                            </div>
+                                        </label>
+                                        <label class="col-sm-6">
+                                            <div class="radio radio-danger">
+                                                <input type="radio" name="radio" id="radio" value="0" th:field="*{status_hl}" />
+                                                <label for="radio"> Deactivate </label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-success btn-outline">Submit</button> 
+                                        <button type="reset" class="btn btn-warning btn-outline">Reset</button> 
+                                        <a th:href="@{/highlight}" class="btn btn-info btn-outline">Back</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		<footer th:replace="layout :: footer"></footer>
+		</div>
+	</div>
+</body>
+</html>

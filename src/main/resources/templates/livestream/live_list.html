@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body class="fix-header">
+	
+    <div id="wrapper">
+		<nav class="navbar navbar-default navbar-static-top m-b-0" th:replace="layout :: header"></nav>
+		<div class="navbar-default sidebar" role="navigation" th:replace="layout :: menu"> </div>
+		<div id="page-wrapper">
+			<div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Notifications</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
+                        <a th:href="@{#}"  class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Crawl Data Online</a>
+                        <a th:href="@{/livestream/add}"  class="btn btn-success pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Add new</a>
+                        
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+				    <th:block th:if="${#lists.isEmpty(lives)}">
+				        <h3>No LiveStream</h3>
+				    </th:block>
+				    <th:block th:unless="${#lists.isEmpty(lives)}">
+                <div class="row">
+                	
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="panel-heading">MANAGE LIVE STREAM</div>
+                            <div class="table-responsive">
+                                <table class="table table-hover manage-u-table">
+                                    <thead>
+                                        <tr>
+                                            <th width="70" class="text-center">#</th>
+                                            <th class="text-center">TITLE LIVESTREAM</th>
+                                            <th class="text-center">LINK LIVESTREAM</th>
+                                            <th class="text-center">THUMBNAIL 1</th>
+                                            <th class="text-center">THUMBNAIL 2</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">MANAGE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="live,iterStat : ${lives}" th:switch="${live.status_live}">
+                                            <td class="text-center" th:text="${iterStat.count}"></td>
+                                            <td class="text-center" th:text="${live.title_live}"></td>
+                                            <td class="text-center" th:text="${live.link_live}"></td>
+                                            <td class="text-center" th:text="${live.thumbnail_team1_live}"></td>
+                                            <td class="text-center" th:text="${live.thumbnail_team2_live}"></td>
+                                            <td class="text-center" th:case="true"><span class="label label-table label-success">Activate</span></td>
+											<td class="text-center" th:case="false"><span class="label label-table label-danger">Deactivate</span></td>
+							
+                                            <td class="text-center">
+                                               	<a th:href="@{/livestream/{id_live}/edit(id_live=${live.id_live})}" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" title="Edit"><i class="ti-pencil-alt"></i></a>
+                                               	<a th:href="@{/livestream/{id_live}/delete(id_live=${live.id_live})}" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" title="Delete"><i class="ti-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                </th:block>
+            </div>
+            							
+			<footer th:replace="layout :: footer"></footer>
+		</div>
+	</div>
+</body>
+</html>
